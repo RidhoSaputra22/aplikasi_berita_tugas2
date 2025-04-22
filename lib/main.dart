@@ -1,9 +1,11 @@
 import 'package:aplikasi_berita_tugas2/Model/NewsModel.dart';
+import 'package:aplikasi_berita_tugas2/Pages/MySearchNewsPage.dart';
 import 'package:aplikasi_berita_tugas2/Widget/MyBanner.dart';
 import 'package:aplikasi_berita_tugas2/Widget/MyButton.dart';
 import 'package:aplikasi_berita_tugas2/Widget/MyDrawer.dart';
 import 'package:aplikasi_berita_tugas2/Widget/MyNews.dart';
 import 'package:aplikasi_berita_tugas2/Widget/MySearchBar.dart';
+import 'package:aplikasi_berita_tugas2/Router/MyRouter.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -46,7 +48,6 @@ class MyHomePage extends StatelessWidget {
             },
           );
         }),
-        title: Text("Aplikasi Berita"),
         backgroundColor: Colors.white,
         shadowColor: Colors.transparent,
         actions: [
@@ -94,10 +95,14 @@ class MyHomePage extends StatelessWidget {
             ),
             Container(
               padding: EdgeInsets.all(6),
-              child: MySearchBar(),
+              child: MySearchBar(
+                onTap: () {
+                  Navigator.of(context).push(MyRouter.searchNewsRoute());
+                },
+              ),
             ),
             SizedBox(
-              height: 20,
+              height: 16,
             ),
             Container(
               // height: 100,
@@ -109,11 +114,39 @@ class MyHomePage extends StatelessWidget {
                   children: [
                     MyButton(
                       text: "Bisnis",
+                      onTap: () {
+                        Navigator.of(context).push(
+                            MyRouter.searchNewsRoute(searchKey: "Bisnis"));
+                      },
                     ),
-                    MyButton(text: "Olahraga"),
-                    MyButton(text: "Life Style"),
-                    MyButton(text: "Teknologi"),
-                    MyButton(text: "Kesehatan"),
+                    MyButton(
+                      text: "Olahraga",
+                      onTap: () {
+                        Navigator.of(context).push(
+                            MyRouter.searchNewsRoute(searchKey: "Olahraga"));
+                      },
+                    ),
+                    MyButton(
+                      text: "Lifestyle",
+                      onTap: () {
+                        Navigator.of(context).push(
+                            MyRouter.searchNewsRoute(searchKey: "Lifestyle"));
+                      },
+                    ),
+                    MyButton(
+                      text: "Teknologi",
+                      onTap: () {
+                        Navigator.of(context).push(
+                            MyRouter.searchNewsRoute(searchKey: "Teknologi"));
+                      },
+                    ),
+                    MyButton(
+                      text: "Kesehatan",
+                      onTap: () {
+                        Navigator.of(context).push(
+                            MyRouter.searchNewsRoute(searchKey: "Bisnis"));
+                      },
+                    ),
                   ],
                 ),
               ),

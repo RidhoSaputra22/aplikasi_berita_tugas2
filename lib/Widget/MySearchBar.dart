@@ -1,7 +1,27 @@
 import 'package:flutter/material.dart';
 
-class MySearchBar extends StatelessWidget {
-  const MySearchBar({super.key});
+class MySearchBar extends StatefulWidget {
+  final Function()? onTap;
+  final String? searchKey;
+
+  const MySearchBar({
+    super.key,
+    this.onTap,
+    this.searchKey,
+  });
+
+  @override
+  State<MySearchBar> createState() => _MySearchBarState();
+}
+
+class _MySearchBarState extends State<MySearchBar> {
+  final TextEditingController _searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.text = widget.searchKey ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +43,10 @@ class MySearchBar extends StatelessWidget {
                       offset: Offset(0, 3),
                     ),
                   ]),
-              child: const TextField(
+              child: TextField(
+                controller: _searchController,
+                textInputAction: TextInputAction.search,
+                autofocus: true,
                 showCursor: true,
                 style: TextStyle(),
                 cursorColor: Colors.black,
@@ -38,7 +61,7 @@ class MySearchBar extends StatelessWidget {
             width: 10,
           ),
           InkWell(
-            onTap: () {},
+            onTap: widget.onTap,
             child: Container(
               height: 50,
               width: 50,
