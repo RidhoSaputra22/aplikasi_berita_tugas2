@@ -1,4 +1,5 @@
 import 'package:aplikasi_berita_tugas2/Model/NewsModel.dart';
+import 'package:aplikasi_berita_tugas2/Router/MyRouter.dart';
 import 'package:aplikasi_berita_tugas2/Widget/MyButton.dart';
 import 'package:aplikasi_berita_tugas2/Widget/MyNews.dart';
 import 'package:aplikasi_berita_tugas2/Widget/MySearchBar.dart';
@@ -75,13 +76,19 @@ class MySearchNewsPage extends StatelessWidget {
                 padding: EdgeInsets.all(6),
                 child: Column(
                   children: NewsModel.getGenerateData()
-                      .map((e) => MyNews(
-                            kategori: e.kategori,
-                            image: e.image,
-                            headline: e.headline,
-                            lastUpdate: e.lastUpdate,
-                            avatar: e.avatar,
-                            userName: e.userName,
+                      .map((e) => InkWell(
+                            onTap: () {
+                              Navigator.of(context)
+                                  .push(MyRouter.newsDetailRoute(newsModel: e));
+                            },
+                            child: MyNews(
+                              kategori: e.kategori,
+                              image: e.image,
+                              headline: e.headline,
+                              lastUpdate: e.lastUpdate,
+                              avatar: e.avatar,
+                              userName: e.userName,
+                            ),
                           ))
                       .toList(),
                 ),
