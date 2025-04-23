@@ -8,8 +8,15 @@ import 'package:aplikasi_berita_tugas2/Router/MyRouter.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -74,8 +81,10 @@ class MyHomePage extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(6),
               child: MySearchBar(
+                searchController: _searchController,
                 onTap: () {
-                  Navigator.of(context).push(MyRouter.searchNewsRoute());
+                  Navigator.of(context).push(MyRouter.searchNewsRoute(
+                      searchKey: _searchController.text));
                 },
               ),
             ),

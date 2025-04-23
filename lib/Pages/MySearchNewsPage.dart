@@ -5,9 +5,16 @@ import 'package:aplikasi_berita_tugas2/Widget/MyNews.dart';
 import 'package:aplikasi_berita_tugas2/Widget/MySearchBar.dart';
 import 'package:flutter/material.dart';
 
-class MySearchNewsPage extends StatelessWidget {
+class MySearchNewsPage extends StatefulWidget {
   final String? searchKey;
   const MySearchNewsPage({super.key, this.searchKey});
+
+  @override
+  State<MySearchNewsPage> createState() => _MySearchNewsPageState();
+}
+
+class _MySearchNewsPageState extends State<MySearchNewsPage> {
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +40,8 @@ class MySearchNewsPage extends StatelessWidget {
           child: Column(
             children: [
               MySearchBar(
-                searchKey: searchKey,
+                searchController: _searchController,
+                searchKey: widget.searchKey,
               ),
               SizedBox(
                 height: 16,

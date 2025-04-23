@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class MySearchBar extends StatefulWidget {
   final Function()? onTap;
   final String? searchKey;
+  final TextEditingController searchController;
 
-  const MySearchBar({
+  MySearchBar({
     super.key,
     this.onTap,
+    required this.searchController,
     this.searchKey,
   });
 
@@ -15,12 +17,11 @@ class MySearchBar extends StatefulWidget {
 }
 
 class _MySearchBarState extends State<MySearchBar> {
-  final TextEditingController _searchController = TextEditingController();
-
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
-    _searchController.text = widget.searchKey ?? '';
+    widget.searchController.text = widget.searchKey ?? '';
   }
 
   @override
@@ -44,7 +45,7 @@ class _MySearchBarState extends State<MySearchBar> {
                     ),
                   ]),
               child: TextField(
-                controller: _searchController,
+                controller: widget.searchController,
                 textInputAction: TextInputAction.search,
                 autofocus: true,
                 showCursor: true,
@@ -83,5 +84,6 @@ class _MySearchBarState extends State<MySearchBar> {
         ],
       ),
     );
+    ;
   }
 }
