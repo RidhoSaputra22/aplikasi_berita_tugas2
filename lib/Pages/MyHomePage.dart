@@ -45,7 +45,11 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 9.0),
-            child: CircleAvatar(
+            child: InkWell(
+              onTap: () {
+                Navigator.of(context).push(MyRouter.ProfileRoute());
+              },
+              child: CircleAvatar(
                 radius: 25,
                 backgroundColor: Colors.white,
                 child: CircleAvatar(
@@ -53,7 +57,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   backgroundImage: AssetImage(
                     "assets/images/profile.jpg",
                   ),
-                )),
+                ),
+              ),
+            ),
           )
         ],
       ),

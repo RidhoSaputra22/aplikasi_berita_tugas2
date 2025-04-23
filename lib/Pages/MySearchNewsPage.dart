@@ -1,13 +1,14 @@
 import 'package:aplikasi_berita_tugas2/Model/NewsModel.dart';
 import 'package:aplikasi_berita_tugas2/Router/MyRouter.dart';
 import 'package:aplikasi_berita_tugas2/Widget/MyButton.dart';
+import 'package:aplikasi_berita_tugas2/Widget/MyDrawer.dart';
 import 'package:aplikasi_berita_tugas2/Widget/MyNews.dart';
 import 'package:aplikasi_berita_tugas2/Widget/MySearchBar.dart';
 import 'package:flutter/material.dart';
 
 class MySearchNewsPage extends StatefulWidget {
-  final String? searchKey;
-  const MySearchNewsPage({super.key, this.searchKey});
+  late String? searchKey;
+  MySearchNewsPage({super.key, this.searchKey});
 
   @override
   State<MySearchNewsPage> createState() => _MySearchNewsPageState();
@@ -15,6 +16,10 @@ class MySearchNewsPage extends StatefulWidget {
 
 class _MySearchNewsPageState extends State<MySearchNewsPage> {
   final TextEditingController _searchController = TextEditingController();
+
+  _search(String key) {
+    _searchController.text = key;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +29,27 @@ class _MySearchNewsPageState extends State<MySearchNewsPage> {
         iconTheme: const IconThemeData(color: Colors.black),
         elevation: 0,
         backgroundColor: Colors.transparent,
+        leading: Navigator.maybeOf(context) != null && Navigator.canPop(context)
+            ? IconButton(
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              )
+            : Builder(builder: (context) {
+                return IconButton(
+                  icon: const Icon(
+                    Icons.menu,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                );
+              }),
         title: const Text(
           "Explore Berita",
           style: TextStyle(
@@ -34,6 +60,7 @@ class _MySearchNewsPageState extends State<MySearchNewsPage> {
         ),
         actions: const [],
       ),
+      drawer: MyDrawer(),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
@@ -56,11 +83,44 @@ class _MySearchNewsPageState extends State<MySearchNewsPage> {
                     children: [
                       MyButton(
                         text: "Bisnis",
+                        onTap: () {
+                          setState(() {
+                            _searchController.text = "Bisnis";
+                          });
+                        },
                       ),
-                      MyButton(text: "Olahraga"),
-                      MyButton(text: "Life Style"),
-                      MyButton(text: "Teknologi"),
-                      MyButton(text: "Kesehatan"),
+                      MyButton(
+                        text: "Olahraga",
+                        onTap: () {
+                          setState(() {
+                            _searchController.text = "Olahraga";
+                          });
+                        },
+                      ),
+                      MyButton(
+                        text: "Lifestyle",
+                        onTap: () {
+                          setState(() {
+                            _searchController.text = "Lifestyle";
+                          });
+                        },
+                      ),
+                      MyButton(
+                        text: "Teknologi",
+                        onTap: () {
+                          setState(() {
+                            _searchController.text = "Teknologi";
+                          });
+                        },
+                      ),
+                      MyButton(
+                        text: "Kesehatan",
+                        onTap: () {
+                          setState(() {
+                            _searchController.text = "Kesehatan";
+                          });
+                        },
+                      ),
                     ],
                   ),
                 ),
