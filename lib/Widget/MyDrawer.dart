@@ -88,7 +88,9 @@ class MyDrawer extends StatelessWidget {
                 color: Colors.black,
               ),
               title: Text("Bookmarks"),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushReplacement(context, MyRouter.BookmarkRoute());
+              },
             ),
           ),
           Container(

@@ -1,3 +1,4 @@
+import 'package:aplikasi_berita_tugas2/Pages/MyCollectionPage.dart';
 import 'package:aplikasi_berita_tugas2/Pages/MyHomePage.dart';
 import 'package:aplikasi_berita_tugas2/Pages/MyProfilePage.dart';
 import 'package:aplikasi_berita_tugas2/Pages/MySearchNewsPage.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         fontFamily: "Poppins",
         useMaterial3: false,
       ),
-      home: MyMainApp(),
+      home: MyCollectionPage(),
       debugShowCheckedModeBanner: false,
     );
   }
