@@ -1,3 +1,5 @@
+import 'package:aplikasi_berita_tugas2/Pages/MyHomePage.dart';
+import 'package:aplikasi_berita_tugas2/Router/MyRouter.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -8,43 +10,48 @@ class MyDrawer extends StatelessWidget {
     return Drawer(
       child: Column(
         children: [
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            padding: EdgeInsets.fromLTRB(16, 20, 50, 20),
-            decoration: BoxDecoration(
-              // shape: BoxShape.rectangle,
-              border: Border(bottom: BorderSide(color: Colors.black54)),
-              color: Colors.transparent,
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  // color: Colors.black,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Pengguna",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w600),
-                      ),
-                      Text(
-                        "pengguna@gmail.com",
-                        style: TextStyle(
-                          fontSize: 11.12,
+          InkWell(
+            onTap: () {
+              Navigator.of(context).push(MyRouter.ProfileRoute());
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.fromLTRB(16, 20, 50, 20),
+              decoration: BoxDecoration(
+                // shape: BoxShape.rectangle,
+                border: Border(bottom: BorderSide(color: Colors.black54)),
+                color: Colors.transparent,
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    // color: Colors.black,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Pengguna",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w600),
                         ),
-                      )
-                    ],
+                        Text(
+                          "pengguna@gmail.com",
+                          style: TextStyle(
+                            fontSize: 11.12,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                CircleAvatar(
-                  radius: 24,
-                  backgroundImage: AssetImage(
-                    "assets/images/profile.jpg",
+                  CircleAvatar(
+                    radius: 24,
+                    backgroundImage: AssetImage(
+                      "assets/images/profile.jpg",
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           SizedBox(height: 18),
@@ -62,7 +69,9 @@ class MyDrawer extends StatelessWidget {
                 color: Colors.black,
               ),
               title: Text("Beranda"),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushReplacement(context, MyRouter.HomeRoute());
+              },
             ),
           ),
           Container(

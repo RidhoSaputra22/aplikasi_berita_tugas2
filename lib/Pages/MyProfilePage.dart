@@ -1,5 +1,10 @@
+import 'package:aplikasi_berita_tugas2/Model/NewsModel.dart';
+import 'package:aplikasi_berita_tugas2/Router/MyRouter.dart';
+import 'package:aplikasi_berita_tugas2/Widget/MyBanner.dart';
 import 'package:aplikasi_berita_tugas2/Widget/MyButton.dart';
+import 'package:aplikasi_berita_tugas2/Widget/MyDrawer.dart';
 import 'package:aplikasi_berita_tugas2/Widget/MyStats.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class MyProfilePage extends StatelessWidget {
@@ -58,7 +63,19 @@ class MyProfilePage extends StatelessWidget {
                                   color: Colors.white,
                                 )),
                           )
-                        : Container()
+                        : Builder(builder: (context) {
+                            return Container(
+                              margin: const EdgeInsets.only(top: 10, left: 10),
+                              child: IconButton(
+                                  onPressed: () {
+                                    Scaffold.of(context).openDrawer();
+                                  },
+                                  icon: Icon(
+                                    Icons.menu,
+                                    color: Colors.white,
+                                  )),
+                            );
+                          })
                   ],
                 ),
               ),
@@ -155,11 +172,74 @@ class MyProfilePage extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
+              SizedBox(height: 15),
+              Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 25,
+                    vertical: 15,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            "Collections",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w600),
+                          ),
+                          Expanded(child: Container()),
+                          MyButton(text: "Lihat Semua", onTap: () {}),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Container(
+                        width: 150,
+                        margin: const EdgeInsets.only(bottom: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          border: Border(
+                              bottom: BorderSide(
+                            color: Colors.black,
+                          )),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        // height: 300,
+                        child: CarouselSlider(
+                          options: CarouselOptions(
+                            height: 250,
+                            viewportFraction: 1.0,
+                            enlargeCenterPage: false,
+                            enableInfiniteScroll: true,
+                          ),
+                          items: NewsModel.getBanner()
+                              .map((e) => MyBanner(
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                          MyRouter.newsDetailRoute(
+                                              newsModel: e));
+                                    },
+                                    kategori: e.kategori,
+                                    image: e.image,
+                                    headline: e.headline,
+                                    title: "Berita Terkini",
+                                  ))
+                              .toList(),
+                        ),
+                      )
+                    ],
+                  ))
             ],
           ),
         ),
       ),
+      drawer: MyDrawer(),
     );
   }
 }
